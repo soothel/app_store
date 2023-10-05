@@ -1,0 +1,73 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="table-responsive">
+    <div class="row">
+      <div class="col-3">Còdigo:</div>
+      <div class="col-9"><%= form.text_field :code ,class: "form-control", :placeholder => "Requerido" %></div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Nombre:</div>
+      <div class="col-9"><%= form.text_field :name ,class: "form-control", :placeholder => "Requerido" %></div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Cantidad:</div>
+      <div class="col-9"><%= form.number_field :qty ,class: "form-control", :placeholder => "Requerido"%></div>        
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Proveedor:</div>
+      <div class="col-9">
+        <%= form.select :supplier_id ,@suppliers.map{ |e| [e.name, e.id] },{}, class: "form-select" %>
+      </div>      
+    </div>
+   
+    <br>
+    <div class="row">
+      <div class="col-3">Categoria:</div>
+      <div class="col-9">
+        <%= form.select :category_id ,@categories.map{ |e| [e.name, e.id] },{}, class: "form-select" %>
+      </div>
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Precio:</div>
+      <div class="col-9"><%= form.number_field :price ,class: "form-control", :placeholder => "Requerido"%></div>        
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Image:</div>
+      <div class="col-9"><%= form.text_field :image ,class: "form-control", :placeholder => "Requerido"%></div>        
+    </div>
+
+    <br>
+    <div class="row">
+      <div class="col-3">Estado:</div>
+      <div class="col-9"><%= form.check_box :is_deleted %></div>        
+    </div> 
+    <br><br>
+  </div>  
+  <br>
+  
+  <div class="row">
+    <%= form.submit "Guardar Datos", class: "btn btn-primary" %>
+  </div>
+
+<% end %>
